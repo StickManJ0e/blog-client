@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuthContext } from './context/AuthContext';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import './styles/App.css'
 
 
 const App = () => {
+  const {loggedIn, user, token} = useAuthContext()
   const [count, setCount] = useState(0)
 
   return (

@@ -1,24 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useAuthContext } from "../context/AuthContext";
 
 const SignIn = () => {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit } = useForm();
+    const [errors, setErrors] = useState('');
+    const [redirectHome, setRedirectHome] = useState()
+    const { setLoggedIn, setUser, setToken } = useAuthContext();
 
     const signInOnSubmit = async (data, e) => {
-        // e.preventDefault();
         const formData = JSON.stringify(data);
-        console.log(formData)
         try {
-            const res = await fetch('http://localhost:3000/sign-in', {
+            // POST request to server 
+            const req = await fetch('http://localhost:3000/sign-in', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: formData,
             });
-            const signInData = await res.json();
+            const signInData = await req.json();
             console.log(signInData)
-            reset();
+
+            // If login error
+            if (req.status !== 200) {
+                setErrors(signInData.info.message);
+            } else {
+                setLoggedIn(true);
+                setUser(signInData.body);
+                setToken(signInData.token);
+                setRedirectHome(<Navigate to='/' />)
+            }
         } catch (err) {
             console.log(err);
         }
@@ -27,6 +40,7 @@ const SignIn = () => {
 
     return (
         <>
+            {redirectHome}
             <form method="post" onSubmit={handleSubmit(signInOnSubmit)}>
                 <label htmlFor="username">Username:</label>
                 <input type="text" id="username" name="username" {...register("username")}></input>
@@ -36,6 +50,7 @@ const SignIn = () => {
 
                 <button type="submit">Log In</button>
             </form>
+            <div>{errors}</div>
         </>
     )
 }
