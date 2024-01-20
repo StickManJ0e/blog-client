@@ -52,15 +52,15 @@ const Post = () => {
             <Navbar />
             {post !== undefined ?
                 <div key={post._id} className="blog-post-container">
+                    <h1 className="title">{post.title}</h1>
                     <div className="header">
-                        <div className="username">{post.user.username}</div>
+                        <div className="username">By {post.user.username}</div>
                         <div className="timestamp">{convertTimestamp(post.timestamp)}</div>
                     </div>
                     <div className="body">
-                        <div className="title">{post.title}</div>
                         <div className="content">{post.content}</div>
                     </div>
-                    <Comments post={post} fetchPost={fetchPost}/>
+                    <Comments post={post} fetchPost={fetchPost} />
 
                 </div>
                 :

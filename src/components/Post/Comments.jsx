@@ -42,7 +42,7 @@ const Comments = (props) => {
         console.log(id)
         try {
             // Delete request to server
-            const req =  await fetch(`http://localhost:3000/posts/${id}/comments/${comment._id}?postid=${id}&id=${comment._id}`, {
+            const req = await fetch(`http://localhost:3000/posts/${id}/comments/${comment._id}?postid=${id}&id=${comment._id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const Comments = (props) => {
         <>
             {post !== undefined ?
                 <div className="comments">
-                    <div>Comments</div>
+                    <h2>Comments</h2>
                     {loggedIn ?
                         <form method="post" onSubmit={handleSubmit(commentOnSubmit)}>
                             <label htmlFor="content"></label>
@@ -83,8 +83,10 @@ const Comments = (props) => {
                     {post.comments.length > 0 ? post.comments.map((comment) => {
                         return (
                             <div className="comment" key={comment._id}>
-                                <div>{comment.user.username}</div>
-                                <div>{convertTimestamp(comment.timestamp)}</div>
+                                <div className="header">
+                                    <div>{comment.user.username}</div>
+                                    <div>{convertTimestamp(comment.timestamp)}</div>
+                                </div>
                                 <div>{comment.content}</div>
                                 {user && comment.user._id == user._id ?
                                     <button className="delete" onClick={() => deleteOnClick(comment)}>Delete</button> :
