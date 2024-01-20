@@ -27,6 +27,10 @@ const Posts = () => {
         return (alteredTimestamp);
     }
 
+    const navPost = (postID) => {
+        navigate(`/posts/${postID}`)
+    }
+
     useEffect(() => {
         fetchPosts()
     }, [])
@@ -36,7 +40,7 @@ const Posts = () => {
             <div className="blog-posts-div">
                 {(allPosts) ? allPosts.map((post) => {
                     return (
-                        <div key={post._id} className="blog-post-div">
+                        <div key={post._id} className="blog-post-div" onClick={() => navPost(post._id)}>
                             <div className="header">
                                 <div className="username">{post.user.username}</div>
                                 <div className="timestamp">{convertTimestamp(post.timestamp)}</div>
