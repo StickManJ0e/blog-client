@@ -39,4 +39,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.delete {
+    background-color: rgb(204, 90, 90);
 }

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../context/AuthContext";
 import Navbar from "../Navbar/Navbar";
 import { useParams } from "react-router-dom";
+import Comments from "./Comments";
 
 const Post = () => {
     const { register, handleSubmit } = useForm();
@@ -35,32 +36,6 @@ const Post = () => {
         }
     }
 
-    const commentOnSubmit = async (data, e) => {
-        const formData = JSON.stringify(data);
-        try {
-            // POST request to server
-            const req = await fetch(`http://localhost:3000/posts/${id}/comments?postid=${id}`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `${token}`,
-                    'user._id': user._id,
-                },
-                body: formData,
-            });
-            const commentData = await req.json();
-            console.log(commentData);
-
-            if (req.status !== 200) {
-                setErrors(commentData.errors[0].msg);
-            } else {
-                fetchPost()
-            }
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
     const convertTimestamp = (timestamp) => {
         let alteredTimestamp = new Date(timestamp).toDateString();
         return (alteredTimestamp);
@@ -85,26 +60,7 @@ const Post = () => {
                         <div className="title">{post.title}</div>
                         <div className="content">{post.content}</div>
                     </div>
-                    <div className="comments">
-                        <div>Comments</div>
-                        {loggedIn ?
-                            <form method="post" onSubmit={handleSubmit(commentOnSubmit)}>
-                                <label htmlFor="content"></label>
-                                <input type="textbox" id="content" name="content" {...register("content")}></input>
-
-                                <button type="submit">Comment</button>
-                                <div>{errors}</div>
-                            </form> :
-                            <button onClick={() => navigate('/sign-in')}>Log in to comment</button>}
-                        {post.comments.length > 0 ? post.comments.map((comment) => {
-                            return (
-                                <div className="comment">
-                                    <div>{comment.user.username}</div>
-                                    <div>{comment.content}</div>
-                                </div>
-                            )
-                        }) : ''}
-                    </div>
+                    <Comments post={post} fetchPost={fetchPost}/>
 
                 </div>
                 :
