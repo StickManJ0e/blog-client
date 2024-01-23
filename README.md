@@ -1,8 +1,11 @@
-# React + Vite
+# Blog Project
+This fullstack project links an API only backend with two seperate front-end sites. One for creating and editing blog posts and the other for reading and commenting on blog posts.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Blog Feed] (public/feed.png)
+![Post page] (public/post.png)
 
-Currently, two official plugins are available:
+## Other Repos In This Project
+- [Link to API] (https://github.com/StickManJ0e/blog-api)
+- [Link to CMS] (https://github.com/StickManJ0e/blog-cms)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Built Using
