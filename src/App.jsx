@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import LogOut from './pages/LogOut';
-import PostCreate from './components/Post/PostCreate';
 import Post from './components/Post/Post';
 import './styles/App.css'
 
@@ -21,7 +20,6 @@ const App = () => {
         <Route exact path='/sign-in' element={loggedIn ? <Navigate to='/' /> : <SignIn />} />
         <Route exact path='/sign-up' element={loggedIn ? <Navigate to='/' /> : <SignUp />} />
         <Route exact path='/log-out' element={<LogOut />} />
-        <Route exact path='/create-post' element={loggedIn ? <PostCreate /> : <Navigate to='/' />} />
         <Route exact path='/posts/:id' element={<Post />} />
       </Routes>
     </BrowserRouter>

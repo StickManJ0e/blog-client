@@ -13,7 +13,6 @@ const Navbar = () => {
                 <button onClick={() => navigate('/')}>Blog</button>
                 {loggedIn ?
                     <div>
-                        <button onClick={() => navigate('/create-post')}>Create Post</button>
                         <button onClick={() => navigate('/log-out')}>Log Out</button>
                     </div> :
                     <div>
