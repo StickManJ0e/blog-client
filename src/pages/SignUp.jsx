@@ -28,7 +28,7 @@ const SignUp = () => {
             if (req.status != 200) {
                 setErrors(signUpData.errors[0].msg);
             } else{
-
+                setRedirectHome(<Navigate to='/' />)
             }
         } catch (err) {
             console.log(err)

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import '../../styles/Navbar.css';
 
 const Navbar = () => {
-    const { loggedIn, user, token } = useAuthContext();
+    const { loggedIn } = useAuthContext();
     const navigate = useNavigate();
 
     return (
